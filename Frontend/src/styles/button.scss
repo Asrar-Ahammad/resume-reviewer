@@ -1,6 +1,5 @@
 .button {
   padding: 0.75rem;
-  border-radius: 1.75rem;
   border: none;
   outline: none;
   font-weight: bold;
@@ -9,8 +8,8 @@
   transition: all 0.3s ease-in-out;
 
   &.primary-button {
-    background-color: #2478ff;
-    color: whitesmoke;
+    background-color: white;
+    color: black;
   }
   &:active {
     transform: scale(0.95);

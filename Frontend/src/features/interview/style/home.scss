@@ -1,0 +1,188 @@
+// ─── Home Page Styles ───────────────────────────────────────────────
+
+main {
+  display: block;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 50px 30px 60px;
+  align-items: unset;
+  justify-content: unset;
+  min-height: calc(100vh - 60px); // account for navbar
+
+  // ── Heading Section ──────────────────────────────────────────────
+  .heading {
+    margin-bottom: 40px;
+
+    h1 {
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    p {
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.55);
+      font-weight: 400;
+    }
+  }
+
+  // ── Form Container (two-column layout) ───────────────────────────
+  .input-form-container {
+    display: flex;
+    gap: 40px;
+
+    // ── Shared label styles ──────────────────────────────────────
+    label {
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 12px;
+    }
+
+    // ── Shared textarea styles ───────────────────────────────────
+    textarea {
+      width: 100%;
+      background-color: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #fff;
+      font-family: "Inter", sans-serif;
+      font-size: 0.85rem;
+      line-height: 1.6;
+      padding: 16px 18px;
+      resize: vertical;
+      outline: none;
+      transition: border-color 0.25s ease;
+
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.3);
+      }
+
+      &:focus {
+        border-color: rgba(255, 255, 255, 0.3);
+      }
+    }
+
+    // ── Left Column ──────────────────────────────────────────────
+    .left {
+      flex: 1;
+
+      .job-description {
+        height: 420px;
+      }
+    }
+
+    // ── Right Column ─────────────────────────────────────────────
+    .right {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+
+      .input-form-group {
+        display: flex;
+        flex-direction: column;
+      }
+
+      // ── File Upload Input ────────────────────────────────────
+      .upload-resume {
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        color: rgba(255, 255, 255, 0.5);
+        font-family: "Inter", sans-serif;
+        font-size: 0.85rem;
+        padding: 40px 18px;
+        cursor: pointer;
+        outline: none;
+        transition: border-color 0.25s ease;
+        text-align: center;
+
+        &:hover {
+          border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        &::file-selector-button {
+          background-color: #fff;
+          color: #000;
+          border: none;
+          border-radius: 4px;
+          padding: 8px 20px;
+          font-family: "Inter", sans-serif;
+          font-size: 0.8rem;
+          font-weight: 600;
+          cursor: pointer;
+          margin-top: 8px;
+          transition: background-color 0.2s ease;
+
+          &:hover {
+            background-color: rgba(255, 255, 255, 0.85);
+          }
+        }
+      }
+
+      // ── Self Description Textarea ────────────────────────────
+      .self-description {
+        height: 250px;
+      }
+    }
+  }
+}
+
+.submit-btn {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+  width: 100%;
+
+  button {
+    background-color: #fff;
+    color: #000;
+    border: none;
+    padding: 8px 20px;
+    font-family: "Inter", sans-serif;
+    font-size: .9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.85);
+    }
+    &:active{
+        scale: .95;
+    }
+  }
+}
+
+// ─── Responsive ──────────────────────────────────────────────────────
+@media (max-width: 768px) {
+  main {
+    padding: 30px 16px 40px;
+
+    .heading h1 {
+      font-size: 1.4rem;
+    }
+
+    .input-form-container {
+      flex-direction: column;
+      gap: 28px;
+
+      .left .job-description {
+        height: 260px;
+      }
+
+      .right .self-description {
+        height: 160px;
+      }
+    }
+  }
+}

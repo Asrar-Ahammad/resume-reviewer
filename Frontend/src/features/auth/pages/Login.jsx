@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "../auth.form.scss";
 import { Link, useNavigate } from "react-router";
 import { useAuth } from "../hooks/useAuth";
-import Grainient from "../../../component/Grainient";
 
 const Login = () => {
   const { loading, handleLogin } = useAuth();
@@ -21,32 +20,7 @@ const Login = () => {
   }
 
   return (
-    <main style={{ width: "100%", height: "600px", position: "relative" }}>
-      <Grainient
-        color1="#FF9FFC"
-        color2="#5227FF"
-        color3="#B19EEF"
-        timeSpeed={0.25}
-        colorBalance={0}
-        warpStrength={1}
-        warpFrequency={5}
-        warpSpeed={2}
-        warpAmplitude={50}
-        blendAngle={0}
-        blendSoftness={0.05}
-        rotationAmount={500}
-        noiseScale={2}
-        grainAmount={0.1}
-        grainScale={2}
-        grainAnimated={false}
-        contrast={1.5}
-        gamma={1}
-        saturation={1}
-        centerX={0}
-        centerY={0}
-        zoom={0.9}
-        className="gradient-bg"
-      />
+    <main>
       <div className="form-container">
         <div className="logo-section">
           <img src="/logo.svg" alt="" />
