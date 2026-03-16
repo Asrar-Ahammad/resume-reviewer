@@ -1,22 +1,23 @@
 // ─── Home Page Styles ───────────────────────────────────────────────
 
 main {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   max-width: 1000px;
   margin: 0 auto;
   padding: 50px 30px 60px;
-  align-items: unset;
-  justify-content: unset;
   min-height: calc(100vh - 60px); // account for navbar
 
   // ── Heading Section ──────────────────────────────────────────────
   .heading {
     margin-bottom: 40px;
+    width: 100%;
 
     h1 {
       font-size: 1.85rem;
       font-weight: 700;
-      letter-spacing: -0.02em;
       margin-bottom: 8px;
     }
 
@@ -25,6 +26,10 @@ main {
       color: rgba(255, 255, 255, 0.55);
       font-weight: 400;
     }
+  }
+
+  .input-wrapper{
+    width: 100%;
   }
 
   // ── Form Container (two-column layout) ───────────────────────────
@@ -95,7 +100,7 @@ main {
         color: rgba(255, 255, 255, 0.5);
         font-family: "Inter", sans-serif;
         font-size: 0.85rem;
-        padding: 40px 18px;
+        padding: 20px 18px;
         cursor: pointer;
         outline: none;
         transition: border-color 0.25s ease;
@@ -126,7 +131,7 @@ main {
 
       // ── Self Description Textarea ────────────────────────────
       .self-description {
-        height: 250px;
+        height: 290px;
       }
     }
   }
