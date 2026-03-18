@@ -1,0 +1,269 @@
+// ─── Interview Reports Page ─────────────────────────────────────────
+
+.ir-reports-page {
+  min-height: 100vh;
+  background: #000;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  padding: 40px 48px 80px;
+
+  @media (max-width: 768px) {
+    padding: 24px 16px 60px;
+  }
+}
+
+// ── Header ────────────────────────────────────────────────────────────
+.ir-reports-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 36px;
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+.ir-reports-header__left {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ir-reports-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+  color: #fff;
+}
+
+.ir-reports-subtitle {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.4);
+  margin: 0;
+}
+
+// ── New Report Button ─────────────────────────────────────────────────
+.ir-reports-new-btn {
+  background: #fff;
+  color: #000;
+  border: none;
+  padding: 9px 16px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s, opacity 0.15s;
+  align-self: flex-start;
+
+  &:hover {
+    opacity: 0.88;
+  }
+
+  @media (max-width: 480px) {
+    align-self: stretch;
+    text-align: center;
+  }
+}
+
+// ── Grid ──────────────────────────────────────────────────────────────
+.ir-reports-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// ── Report Card ───────────────────────────────────────────────────────
+.ir-reports-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 20px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.15s ease;
+
+  &:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.04);
+    transform: translateY(-2px);
+
+    .ir-reports-card__arrow {
+      opacity: 1;
+      transform: translateX(2px);
+    }
+  }
+
+  &:active {
+    transform: translateY(0px);
+  }
+}
+
+// Card header — title + score badge
+.ir-reports-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.ir-reports-card__title {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #fff;
+  margin: 0;
+  line-height: 1.4;
+  flex: 1;
+}
+
+.ir-reports-card__score-badge {
+  font-size: 0.88rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+// Score progress bar
+.ir-reports-card__bar-track {
+  height: 3px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.ir-reports-card__bar-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.4s ease;
+}
+
+// Score label
+.ir-reports-card__score-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+// Footer — date and time
+.ir-reports-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.ir-reports-card__date {
+  font-size: 0.76rem;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.ir-reports-card__time {
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+// Arrow indicator
+.ir-reports-card__arrow {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.25);
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+// ── Empty State ───────────────────────────────────────────────────────
+.ir-reports-empty {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 24px;
+  gap: 12px;
+  text-align: center;
+}
+
+.ir-reports-empty__icon {
+  font-size: 2rem;
+  margin-bottom: 4px;
+  opacity: 0.4;
+}
+
+.ir-reports-empty__title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+}
+
+.ir-reports-empty__sub {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.35);
+  margin: 0 0 8px;
+}
+
+// ── Skeleton Loading ──────────────────────────────────────────────────
+@keyframes ir-shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+.ir-skeleton {
+  border-radius: 4px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.04) 25%,
+    rgba(255, 255, 255, 0.09) 50%,
+    rgba(255, 255, 255, 0.04) 75%
+  );
+  background-size: 800px 100%;
+  animation: ir-shimmer 1.4s infinite linear;
+}
+
+.ir-skeleton--title {
+  height: 16px;
+  width: 65%;
+}
+
+.ir-skeleton--badge {
+  height: 16px;
+  width: 36px;
+  flex-shrink: 0;
+}
+
+.ir-skeleton--text {
+  height: 12px;
+  width: 50%;
+}
+
+.ir-skeleton--short {
+  width: 30%;
+}
+
+.ir-reports-card--skeleton {
+  cursor: default;
+  pointer-events: none;
+
+  .ir-reports-card__header {
+    align-items: center;
+  }
+
+  .ir-reports-card__footer {
+    align-items: center;
+  }
+}

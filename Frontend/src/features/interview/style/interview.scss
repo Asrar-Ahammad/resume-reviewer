@@ -1,0 +1,639 @@
+// ─── Interview Report Page ──────────────────────────────────────────
+
+html, body {
+  overflow: hidden !important;
+  height: 100% !important;
+}
+
+.ir-layout {
+  display: flex;
+  position: fixed;
+  top: 60px; // update this to match your navbar height
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #000;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  overflow: hidden;
+}
+
+// ── Left Sidebar ──────────────────────────────────────────────────────
+.ir-sidebar-left {
+  width: 220px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 28px 16px;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  background-color: #000;
+}
+
+// ── Middle Content ────────────────────────────────────────────────────
+.ir-content {
+  flex: 1;
+  min-width: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 28px 40px 60px 40px;
+  background-color: #000;
+}
+
+// ── Right Sidebar ─────────────────────────────────────────────────────
+.ir-sidebar-right {
+  width: 280px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 28px 16px;
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: #000;
+}
+
+.view-reports-btn{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 2rem;
+
+  button{
+    border: none;
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+
+    &:hover{
+      background-color: #fff;
+      color: #000;
+    }
+
+    &:active{
+      scale: 0.95;
+    }
+  }
+}
+
+// ── Sidebar Label ─────────────────────────────────────────────────────
+.ir-sidebar-label {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+// ── Left Nav ──────────────────────────────────────────────────────────
+.ir-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ir-nav-item {
+  background: none;
+  border: none;
+  border-left: 2px solid transparent;
+  padding: 10px 14px;
+  color: rgba(255, 255, 255, 0.4);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.83rem;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 0 4px 4px 0;
+  transition: color 0.15s, background 0.15s, border-color 0.15s;
+
+  &:hover {
+    color: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  &.ir-nav-item--active {
+    border-left-color: #fff;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.05);
+  }
+}
+
+// ── Section Header ────────────────────────────────────────────────────
+.ir-section-header {
+  margin-bottom: 24px;
+
+  h2 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0 0 6px 0;
+    color: #fff;
+  }
+
+  p {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.4);
+    margin: 0;
+  }
+}
+
+// ── Accordion ────────────────────────────────────────────────────────
+.ir-accordion {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 10px;
+  background: rgba(255, 255, 255, 0.02);
+  overflow: hidden;
+  transition: border-color 0.25s ease, background 0.25s ease;
+
+  &:last-child { margin-bottom: 0; }
+
+  &.ir-accordion--open {
+    border-color: rgba(255, 255, 255, 0.16);
+    background: rgba(255, 255, 255, 0.03);
+
+    .ir-accordion-chevron {
+      transform: rotate(45deg);
+    }
+
+    .ir-accordion-morph {
+      grid-template-rows: 1fr;
+      opacity: 1;
+    }
+  }
+  .ir-accordion-block{
+    padding-top: 1rem;
+  }
+}
+
+.ir-accordion-trigger {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 16px 20px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.03);
+  }
+}
+
+.ir-accordion-trigger-left {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+}
+
+.ir-accordion-question {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.5;
+}
+
+// Plus → X morph using a single element with pseudo elements
+.ir-accordion-chevron {
+  position: relative;
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  margin-top: 4px;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    background: rgba(255, 255, 255, 0.45);
+    border-radius: 2px;
+    transition: background 0.2s;
+  }
+
+  // Horizontal bar
+  &::before {
+    width: 14px;
+    height: 1.5px;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+  }
+
+  // Vertical bar
+  &::after {
+    width: 1.5px;
+    height: 14px;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+  }
+}
+
+// Grid morph wrapper — animates height smoothly
+.ir-accordion-morph {
+  display: grid;
+  grid-template-rows: 0fr;   // collapsed
+  opacity: 0;
+  transition:
+    grid-template-rows 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.25s ease;
+}
+
+.ir-accordion-body {
+  overflow: hidden;            // required for grid trick
+  padding: 0 20px 20px 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+// ── Shared Card Styles ────────────────────────────────────────────────
+.ir-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 3px 7px;
+  border-radius: 3px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.ir-card-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.06);
+  margin: 14px 0 0;
+}
+
+.ir-card-label {
+  display: block;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.35);
+  margin-bottom: 6px;
+}
+
+.ir-card-text {
+  font-size: 0.8rem;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.65);
+  margin: 0;
+}
+
+// ── Timeline ──────────────────────────────────────────────────────────
+.ir-timeline {
+  display: flex;
+  flex-direction: column;
+}
+
+.ir-timeline-row {
+  display: flex;
+  gap: 20px;
+}
+
+.ir-timeline-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.ir-timeline-circle {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.04);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.ir-timeline-line {
+  width: 1px;
+  flex: 1;
+  min-height: 16px;
+  margin: 5px 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.15) 0px,
+    rgba(255, 255, 255, 0.15) 4px,
+    transparent 4px,
+    transparent 9px
+  );
+}
+
+.ir-timeline-body {
+  padding: 4px 0 28px 0;
+  flex: 1;
+}
+
+.ir-timeline-focus {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #fff;
+  margin: 0 0 10px 0;
+}
+
+.ir-timeline-tasks {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  li {
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.55);
+    line-height: 1.55;
+    padding-left: 14px;
+    position: relative;
+
+    &::before {
+      content: '–';
+      position: absolute;
+      left: 0;
+      color: rgba(255, 255, 255, 0.25);
+    }
+  }
+}
+
+// ── Score Section ─────────────────────────────────────────────────────
+.ir-score-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 4px;
+}
+
+.ir-ring-wrap {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0 14px;
+}
+
+.ir-ring-svg {
+  position: absolute;
+  inset: 0;
+  transform: rotate(-90deg);
+}
+
+.ir-ring-track {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.06);
+  stroke-width: 6;
+}
+
+.ir-ring-fill {
+  fill: none;
+  stroke-width: 6;
+  stroke-linecap: round;
+}
+
+.ir-ring-number {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #fff;
+  position: relative;
+  z-index: 1;
+}
+
+.ir-score-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+// ── Divider ────────────────────────────────────────────────────────────
+.ir-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 20px 0;
+}
+
+// ── Skill Gaps ─────────────────────────────────────────────────────────
+.ir-gaps-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.ir-gaps-subtitle {
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.35);
+  margin: 6px 0 14px;
+}
+
+.ir-gap-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 11px 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 8px;
+
+  &:last-child { margin-bottom: 0; }
+}
+
+.ir-gap-skill {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.4;
+  flex: 1;
+}
+
+.ir-gap-badge {
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: capitalize;
+  padding: 3px 8px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+// ── Scrollbars ─────────────────────────────────────────────────────────
+.ir-content,
+.ir-sidebar-right {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.08) transparent;
+
+  &::-webkit-scrollbar { width: 4px; }
+  &::-webkit-scrollbar-track { background: transparent; }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 2px;
+  }
+}
+
+// ── Mobile Topbar (hidden on desktop) ──────────────────────────────────
+.ir-mobile-topbar {
+  display: none;
+}
+
+// ── Mobile Topbar styles (always defined, shown only on mobile) ─────────
+.ir-mobile-topbar {
+  display: none;
+}
+
+// ── Responsive ─────────────────────────────────────────────────────────
+@media (max-width: 768px) {
+  html, body {
+    overflow: auto !important;
+    height: auto !important;
+  }
+
+  // Stack everything vertically, use order to control sequence:
+  // 1. ir-sidebar-right  (score + skill gaps)
+  // 2. ir-mobile-topbar  (hamburger menu)
+  // 3. ir-content        (questions / prep plan)
+  .ir-layout {
+    position: relative;
+    top: 0;
+    flex-direction: column;
+    height: auto;
+    overflow: visible;
+  }
+
+  // 1 — Right sidebar moves to top
+  .ir-sidebar-right {
+    order: 1;
+    width: 100%;
+    overflow-y: visible;
+    border-left: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 20px 16px;
+
+    .ir-score-section {
+      flex: 1;
+      .ir-ring-wrap { width: 90px; height: 90px; margin: 12px 0 10px; }
+      .ir-ring-number { font-size: 1.5rem; }
+    }
+
+    .ir-divider {
+      width: 1px;
+      height: auto;
+      min-height: 60px;
+      margin: 0;
+    }
+
+    .ir-gaps-section { flex: 1; }
+  }
+
+  // 2 — Mobile topbar (hamburger) appears second
+  .ir-mobile-topbar {
+    order: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    background: #000;
+    position: relative;
+    z-index: 100;
+  }
+
+  // 3 — Content appears last
+  .ir-content {
+    order: 3;
+    overflow-y: visible;
+    padding: 20px 16px 40px;
+  }
+
+  // Hide desktop left sidebar
+  .ir-sidebar-left {
+    display: none;
+  }
+
+  .ir-mobile-section-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #fff;
+  }
+
+  .ir-hamburger {
+    background: none;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 7px 9px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s, border-color 0.15s;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+  }
+
+  .ir-mobile-dropdown {
+    position: absolute;
+    top: calc(100% + 4px);
+    right: 16px;
+    background: black;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    overflow: hidden;
+    min-width: 220px;
+    z-index: 200;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+  }
+
+  .ir-mobile-dropdown-item {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 13px 16px;
+    color: rgba(255, 255, 255, 0.6);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.84rem;
+    font-weight: 500;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    transition: background 0.15s, color 0.15s;
+
+    &:last-child { border-bottom: none; }
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+    }
+
+    &.ir-mobile-dropdown-item--active {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.06);
+    }
+  }
+
+  .ir-mobile-check {
+    font-size: 0.75rem;
+    color: white;
+  }
+}

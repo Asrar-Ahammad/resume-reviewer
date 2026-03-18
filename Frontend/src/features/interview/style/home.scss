@@ -14,6 +14,18 @@ main {
   .heading {
     margin-bottom: 40px;
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .heading-right{
+      button{
+        padding: 8px 20px;
+        font-weight: bold;
+        border: none;
+        cursor: pointer;
+      }
+    }
 
     h1 {
       font-size: 1.85rem;
@@ -61,6 +73,7 @@ main {
       resize: vertical;
       outline: none;
       transition: border-color 0.25s ease;
+      resize: none;
 
       &::placeholder {
         color: rgba(255, 255, 255, 0.3);

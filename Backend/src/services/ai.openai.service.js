@@ -25,6 +25,7 @@ const interviewReportSchema = z.object({
         focus: z.string().describe("The main focus of this day in the preperation plan"),
         tasks: z.array(z.string()).describe("The List of tasks to be done in the preperation plan")
     })).describe("A day-wise preperation plan for the candidate to follow in order to get ready for interview"),
+    title: z.string().describe("The title of the job for which the interview report is generated")
 })
 
 const SYSTEM_PROMPT = `
@@ -36,6 +37,7 @@ Follow these rules strictly:
 - Generate 4 to 5 behavioral questions. Use the STAR method (Situation, Task, Action, Result) in the answer guide.
 - Identify skill gaps with severity: "low", "medium", or "high".
 - Create a 7-day preparation plan with specific actionable tasks for each day.
+- Generate a title of the job for which the interview report is generated.
 - Be detailed and specific — tailor everything to the candidate's actual profile and the job description provided.
 `
 
