@@ -8,16 +8,19 @@ app.use(cookieParser());
 
 const allowedOrigins = [
   'https://resume-reviewer-woad.vercel.app',
-  'http://localhost:5173'
+  'http://localhost:5173',
+  'http://localhost:3000',
 ]
 
 app.use(
   cors({
     origin: (origin, callback) => {
-      // allow requests with no origin (mobile apps, Postman etc.)
+      console.log('Incoming origin:', origin)
+      
       if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true)
       } else {
+        console.log('Blocked origin:', origin)
         callback(new Error('Not allowed by CORS'))
       }
     },
