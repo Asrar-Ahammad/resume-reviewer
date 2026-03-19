@@ -1,10 +1,11 @@
 import axios from "axios"
 
-const api = axios.create({
-    baseURL: "http://localhost:3000",
-    withCredentials: true
+const API_URL = process.env.EXPRESS_APP_URL || "http://localhost:3000";
 
-})
+const api = axios.create({
+  baseURL: API_URL,
+  withCredentials: true,
+});
 
 /**
  *  @description Service to generate interview report on the basis of user self description, resume pdf and job description
