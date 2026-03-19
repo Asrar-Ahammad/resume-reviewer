@@ -17,7 +17,7 @@ const Register = () => {
   };
 
   return (
-    <main>
+    <div className="auth-main-page">
       <div className="form-container">
         <div className="logo-section">
           <img src="/logo.svg" alt="" />
@@ -64,7 +64,7 @@ const Register = () => {
           Already have an account? <Link to={"/login"}>Login</Link>
         </p>
       </div>
-    </main>
+    </div>
   );
 };
 

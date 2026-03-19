@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router'
 import { useInterview } from '../hooks/useInterview'
 import '../style/interviewReports.scss'
 import { FileTextIcon } from '@phosphor-icons/react'
+import { useAuth } from '../../auth/hooks/useAuth'
 
 const formatDate = (iso) => {
   const date = new Date(iso)
@@ -42,6 +43,12 @@ const SkeletonCard = () => (
 const InterviewReports = () => {
   const { reports, loading } = useInterview()
   const navigate = useNavigate()
+  const { handleLogout } = useAuth()
+
+  const Logout = async () => {
+    await handleLogout()
+    navigate("/login")
+  }
 
   return (
     <div className="ir-reports-page">
@@ -54,12 +61,20 @@ const InterviewReports = () => {
             {loading ? 'Loading your reports...' : `${reports?.length ?? 0} report${reports?.length !== 1 ? 's' : ''} generated`}
           </p>
         </div>
-        <button
-          className="ir-reports-new-btn"
-          onClick={() => navigate('/')}
-        >
-          + New Report
-        </button>
+        <div className="ir-reports-header__right">
+          <button
+            className="ir-reports-new-btn"
+            onClick={() => navigate('/')}
+          >
+            + New Report
+          </button>
+          <button
+            className="ir-reports-new-btn"
+            onClick={Logout}
+          >
+            Logout
+          </button>
+        </div>
       </div>
 
       {/* Grid */}

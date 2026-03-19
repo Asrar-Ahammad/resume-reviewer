@@ -1,95 +1,93 @@
-// ─── Interview Report Page ──────────────────────────────────────────
+// ─── Interview Report Page ──────────────────────────────────────────────────
 
 html, body {
   overflow: hidden !important;
   height: 100% !important;
 }
 
+// ── Layout ────────────────────────────────────────────────────────────────────
 .ir-layout {
   display: flex;
   position: fixed;
-  top: 60px; // update this to match your navbar height
+  top: 60px; // update to match your navbar height
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #000;
+  background: #000;
   color: #fff;
   font-family: 'Inter', sans-serif;
   overflow: hidden;
 }
 
-// ── Left Sidebar ──────────────────────────────────────────────────────
+// ── Left Sidebar ──────────────────────────────────────────────────────────────
 .ir-sidebar-left {
-  width: 220px;
+  width: 240px;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
   padding: 28px 16px;
   border-right: 1px solid rgba(255, 255, 255, 0.08);
-  overflow: hidden;
-  background-color: #000;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
-// ── Middle Content ────────────────────────────────────────────────────
+// ── Middle Content ─────────────────────────────────────────────────────────────
 .ir-content {
   flex: 1;
   min-width: 0;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 28px 40px 60px 40px;
-  background-color: #000;
+  padding: 28px 40px 60px;
+  background: #000;
 }
 
-// ── Right Sidebar ─────────────────────────────────────────────────────
+// ── Right Sidebar ──────────────────────────────────────────────────────────────
 .ir-sidebar-right {
   width: 280px;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
+  gap: 0;
   padding: 28px 16px;
   border-left: 1px solid rgba(255, 255, 255, 0.08);
   overflow-y: auto;
   overflow-x: hidden;
-  background-color: #000;
 }
 
-.view-reports-btn{
-  display: flex;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
-  padding-bottom: 2rem;
-
-  button{
-    border: none;
-    padding: 0.5rem 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-
-    &:hover{
-      background-color: #fff;
-      color: #000;
-    }
-
-    &:active{
-      scale: 0.95;
-    }
-  }
-}
-
-// ── Sidebar Label ─────────────────────────────────────────────────────
+// ── Shared sidebar label ───────────────────────────────────────────────────────
 .ir-sidebar-label {
   display: block;
-  font-size: 0.68rem;
+  font-size: 0.65rem;
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.35);
 }
 
-// ── Left Nav ──────────────────────────────────────────────────────────
+// ── Sidebar divider ────────────────────────────────────────────────────────────
+.ir-sidebar-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 4px 0;
+}
+
+// ── Job title in left sidebar ──────────────────────────────────────────────────
+.ir-job-title-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ir-job-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+  line-height: 1.4;
+}
+
+// ── Left Nav ───────────────────────────────────────────────────────────────────
 .ir-nav {
   display: flex;
   flex-direction: column;
@@ -100,10 +98,10 @@ html, body {
   background: none;
   border: none;
   border-left: 2px solid transparent;
-  padding: 10px 14px;
+  padding: 10px 12px;
   color: rgba(255, 255, 255, 0.4);
   font-family: 'Inter', sans-serif;
-  font-size: 0.83rem;
+  font-size: 0.82rem;
   font-weight: 500;
   text-align: left;
   cursor: pointer;
@@ -122,27 +120,55 @@ html, body {
   }
 }
 
-// ── Section Header ────────────────────────────────────────────────────
+// ── View reports button ────────────────────────────────────────────────────────
+.ir-view-reports-btn {
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 5px;
+  padding: 9px 14px;
+  color: rgba(255, 255, 255, 0.6);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  margin-bottom: 4px;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.25);
+  }
+}
+
+// ── Section content wrapper ────────────────────────────────────────────────────
+.ir-section-content {
+  width: 100%;
+}
+
+// ── Section header ─────────────────────────────────────────────────────────────
 .ir-section-header {
   margin-bottom: 24px;
 
   h2 {
-    font-size: 1.3rem;
+    font-size: 1.25rem;
     font-weight: 700;
     margin: 0 0 6px 0;
     color: #fff;
   }
 
   p {
-    font-size: 0.8rem;
-    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.35);
     margin: 0;
   }
 }
 
-// ── Accordion ────────────────────────────────────────────────────────
+// ── Accordion ──────────────────────────────────────────────────────────────────
 .ir-accordion {
   border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
   margin-bottom: 10px;
   background: rgba(255, 255, 255, 0.02);
   overflow: hidden;
@@ -154,17 +180,7 @@ html, body {
     border-color: rgba(255, 255, 255, 0.16);
     background: rgba(255, 255, 255, 0.03);
 
-    .ir-accordion-chevron {
-      transform: rotate(45deg);
-    }
-
-    .ir-accordion-morph {
-      grid-template-rows: 1fr;
-      opacity: 1;
-    }
-  }
-  .ir-accordion-block{
-    padding-top: 1rem;
+    .ir-accordion-chevron { transform: rotate(45deg); }
   }
 }
 
@@ -181,9 +197,7 @@ html, body {
   text-align: left;
   transition: background 0.15s;
 
-  &:hover {
-    background: rgba(255, 255, 255, 0.03);
-  }
+  &:hover { background: rgba(255, 255, 255, 0.03); }
 }
 
 .ir-accordion-trigger-left {
@@ -195,13 +209,12 @@ html, body {
 }
 
 .ir-accordion-question {
-  font-size: 0.88rem;
+  font-size: 0.87rem;
   font-weight: 600;
   color: #fff;
   line-height: 1.5;
 }
 
-// Plus → X morph using a single element with pseudo elements
 .ir-accordion-chevron {
   position: relative;
   width: 14px;
@@ -210,58 +223,58 @@ html, body {
   margin-top: 4px;
   transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 
-  &::before,
-  &::after {
+  &::before, &::after {
     content: '';
     position: absolute;
-    background: rgba(255, 255, 255, 0.45);
+    background: rgba(255, 255, 255, 0.4);
     border-radius: 2px;
-    transition: background 0.2s;
   }
 
-  // Horizontal bar
   &::before {
-    width: 14px;
-    height: 1.5px;
-    top: 50%;
-    left: 0;
+    width: 14px; height: 1.5px;
+    top: 50%; left: 0;
     transform: translateY(-50%);
   }
 
-  // Vertical bar
   &::after {
-    width: 1.5px;
-    height: 14px;
-    left: 50%;
-    top: 0;
+    width: 1.5px; height: 14px;
+    left: 50%; top: 0;
     transform: translateX(-50%);
   }
 }
 
-// Grid morph wrapper — animates height smoothly
 .ir-accordion-morph {
   display: grid;
-  grid-template-rows: 0fr;   // collapsed
+  grid-template-rows: 0fr;
   opacity: 0;
+  pointer-events: none; // ✅ prevents intercepting clicks when collapsed
   transition:
     grid-template-rows 0.35s cubic-bezier(0.4, 0, 0.2, 1),
     opacity 0.25s ease;
 }
 
+.ir-accordion--open .ir-accordion-morph {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  pointer-events: auto; // ✅ restore when open
+}
+
 .ir-accordion-body {
-  overflow: hidden;            // required for grid trick
-  padding: 0 20px 20px 20px;
+  overflow: hidden;
+  padding: 0 20px 20px;
   border-top: 1px solid rgba(255, 255, 255, 0.07);
 }
 
-// ── Shared Card Styles ────────────────────────────────────────────────
+.ir-accordion-block { padding-top: 16px; }
+
+// ── Shared card styles ─────────────────────────────────────────────────────────
 .ir-badge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   background: rgba(255, 255, 255, 0.08);
   color: rgba(255, 255, 255, 0.6);
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   font-weight: 700;
   padding: 3px 7px;
   border-radius: 3px;
@@ -289,11 +302,11 @@ html, body {
 .ir-card-text {
   font-size: 0.8rem;
   line-height: 1.65;
-  color: rgba(255, 255, 255, 0.65);
+  color: rgba(255, 255, 255, 0.62);
   margin: 0;
 }
 
-// ── Timeline ──────────────────────────────────────────────────────────
+// ── Timeline ───────────────────────────────────────────────────────────────────
 .ir-timeline {
   display: flex;
   flex-direction: column;
@@ -341,7 +354,7 @@ html, body {
 }
 
 .ir-timeline-body {
-  padding: 4px 0 28px 0;
+  padding: 4px 0 28px;
   flex: 1;
 }
 
@@ -349,7 +362,7 @@ html, body {
   font-size: 0.9rem;
   font-weight: 600;
   color: #fff;
-  margin: 0 0 10px 0;
+  margin: 0 0 10px;
 }
 
 .ir-timeline-tasks {
@@ -376,7 +389,7 @@ html, body {
   }
 }
 
-// ── Score Section ─────────────────────────────────────────────────────
+// ── Score ring ─────────────────────────────────────────────────────────────────
 .ir-score-section {
   display: flex;
   flex-direction: column;
@@ -386,12 +399,12 @@ html, body {
 
 .ir-ring-wrap {
   position: relative;
-  width: 140px;
-  height: 140px;
+  width: 130px;
+  height: 130px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 20px 0 14px;
+  margin: 16px 0 12px;
 }
 
 .ir-ring-svg {
@@ -413,7 +426,7 @@ html, body {
 }
 
 .ir-ring-number {
-  font-size: 2.2rem;
+  font-size: 2rem;
   font-weight: 700;
   color: #fff;
   position: relative;
@@ -421,20 +434,20 @@ html, body {
 }
 
 .ir-score-badge {
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
-// ── Divider ────────────────────────────────────────────────────────────
+// ── Divider ────────────────────────────────────────────────────────────────────
 .ir-divider {
   height: 1px;
   background: rgba(255, 255, 255, 0.08);
   margin: 20px 0;
 }
 
-// ── Skill Gaps ─────────────────────────────────────────────────────────
+// ── Skill gaps ─────────────────────────────────────────────────────────────────
 .ir-gaps-section {
   display: flex;
   flex-direction: column;
@@ -451,16 +464,17 @@ html, body {
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  padding: 11px 12px;
+  padding: 10px 12px;
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
   margin-bottom: 8px;
 
   &:last-child { margin-bottom: 0; }
 }
 
 .ir-gap-skill {
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   color: rgba(255, 255, 255, 0.75);
   line-height: 1.4;
   flex: 1;
@@ -471,13 +485,23 @@ html, body {
   font-weight: 700;
   text-transform: capitalize;
   padding: 3px 8px;
+  border-radius: 3px;
   white-space: nowrap;
   flex-shrink: 0;
 }
 
-// ── Scrollbars ─────────────────────────────────────────────────────────
+// ── Mobile-only elements (hidden on desktop) ───────────────────────────────────
+.ir-mobile-job-title,
+.ir-mobile-score-block,
+.ir-mobile-tabs,
+.ir-mobile-divider {
+  display: none;
+}
+
+// ── Scrollbars ─────────────────────────────────────────────────────────────────
 .ir-content,
-.ir-sidebar-right {
+.ir-sidebar-right,
+.ir-sidebar-left {
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.08) transparent;
 
@@ -489,27 +513,47 @@ html, body {
   }
 }
 
-// ── Mobile Topbar (hidden on desktop) ──────────────────────────────────
-.ir-mobile-topbar {
-  display: none;
+// ── Loading skeleton ────────────────────────────────────────────────────────────
+@keyframes ir-shimmer {
+  0%   { background-position: -600px 0; }
+  100% { background-position: 600px 0; }
 }
 
-// ── Mobile Topbar styles (always defined, shown only on mobile) ─────────
-.ir-mobile-topbar {
-  display: none;
+.ir-skeleton {
+  border-radius: 4px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.03) 25%,
+    rgba(255, 255, 255, 0.07) 50%,
+    rgba(255, 255, 255, 0.03) 75%
+  );
+  background-size: 1200px 100%;
+  animation: ir-shimmer 1.6s infinite linear;
+
+  &--label  { height: 10px; width: 60%; }
+  &--nav    { height: 36px; width: 100%; border-radius: 4px; }
+  &--heading { height: 24px; width: 50%; margin-bottom: 24px; }
+  &--card   { height: 56px; width: 100%; margin-bottom: 10px; border-radius: 6px; }
+  &--ring   { width: 130px; height: 130px; border-radius: 50%; align-self: center; margin: 16px 0; }
+  &--gap-card { height: 40px; width: 100%; border-radius: 4px; margin-bottom: 8px; }
 }
 
-// ── Responsive ─────────────────────────────────────────────────────────
+.ir-layout--loading {
+  .ir-sidebar-left,
+  .ir-sidebar-right {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+// ── Responsive ─────────────────────────────────────────────────────────────────
 @media (max-width: 768px) {
   html, body {
     overflow: auto !important;
     height: auto !important;
   }
 
-  // Stack everything vertically, use order to control sequence:
-  // 1. ir-sidebar-right  (score + skill gaps)
-  // 2. ir-mobile-topbar  (hamburger menu)
-  // 3. ir-content        (questions / prep plan)
   .ir-layout {
     position: relative;
     top: 0;
@@ -518,122 +562,145 @@ html, body {
     overflow: visible;
   }
 
-  // 1 — Right sidebar moves to top
+  // Hide desktop sidebars
+  .ir-sidebar-left,
   .ir-sidebar-right {
-    order: 1;
-    width: 100%;
-    overflow-y: visible;
-    border-left: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    padding: 20px 16px;
-
-    .ir-score-section {
-      flex: 1;
-      .ir-ring-wrap { width: 90px; height: 90px; margin: 12px 0 10px; }
-      .ir-ring-number { font-size: 1.5rem; }
-    }
-
-    .ir-divider {
-      width: 1px;
-      height: auto;
-      min-height: 60px;
-      margin: 0;
-    }
-
-    .ir-gaps-section { flex: 1; }
-  }
-
-  // 2 — Mobile topbar (hamburger) appears second
-  .ir-mobile-topbar {
-    order: 2;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 14px 16px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    background: #000;
-    position: relative;
-    z-index: 100;
-  }
-
-  // 3 — Content appears last
-  .ir-content {
-    order: 3;
-    overflow-y: visible;
-    padding: 20px 16px 40px;
-  }
-
-  // Hide desktop left sidebar
-  .ir-sidebar-left {
     display: none;
   }
 
-  .ir-mobile-section-label {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: #fff;
+  // Middle content becomes the full page
+  .ir-content {
+    padding: 20px 16px 48px;
+    overflow-y: visible;
   }
 
-  .ir-hamburger {
-    background: none;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    padding: 7px 9px;
-    cursor: pointer;
+  // Show mobile job title
+  .ir-mobile-job-title {
     display: flex;
+    flex-direction: row;
     align-items: center;
-    justify-content: center;
-    transition: background 0.15s, border-color 0.15s;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 20px;
 
-    &:hover {
-      background: rgba(255, 255, 255, 0.06);
-      border-color: rgba(255, 255, 255, 0.3);
+    .ir-job-title {
+      font-size: 1rem;
+      font-weight: 700;
+      margin: 0;
+      color: #fff;
+      text-align: right;
     }
   }
 
-  .ir-mobile-dropdown {
-    position: absolute;
-    top: calc(100% + 4px);
-    right: 16px;
-    background: black;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    overflow: hidden;
-    min-width: 220px;
-    z-index: 200;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+  .ir-mobile-title-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+    flex: 1;
+    min-width: 0;
+
+    .ir-sidebar-label {
+      text-align: right;
+    }
+
+    .ir-job-title {
+      // truncate long titles gracefully
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 100%;
+    }
   }
 
-  .ir-mobile-dropdown-item {
-    width: 100%;
+  .ir-mobile-back-btn {
     background: none;
-    border: none;
-    padding: 13px 16px;
-    color: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 5px;
+    padding: 8px 12px;
+    color: rgba(255, 255, 255, 0.55);
     font-family: 'Inter', sans-serif;
-    font-size: 0.84rem;
+    font-size: 0.76rem;
     font-weight: 500;
-    text-align: left;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    transition: background 0.15s, color 0.15s;
-
-    &:last-child { border-bottom: none; }
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
 
     &:hover {
       background: rgba(255, 255, 255, 0.05);
       color: #fff;
-    }
-
-    &.ir-mobile-dropdown-item--active {
-      color: #fff;
-      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.25);
     }
   }
 
-  .ir-mobile-check {
-    font-size: 0.75rem;
-    color: white;
+  // Show mobile score + gaps block
+  .ir-mobile-score-block {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 20px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    margin-bottom: 20px;
+
+    .ir-score-section {
+      width: 100%;
+      padding-bottom: 20px;
+
+      .ir-ring-wrap {
+        width: 110px;
+        height: 110px;
+        margin: 12px 0 10px;
+      }
+
+      .ir-ring-number { font-size: 1.8rem; }
+    }
+
+    .ir-gaps-section {
+      width: 100%;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+  }
+
+  // Divider hidden on mobile (replaced by border-top on gaps section)
+  .ir-mobile-divider {
+    display: none;
+  }
+
+  // Show horizontal tab nav
+  .ir-mobile-tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    margin-bottom: 20px;
+    overflow-x: auto;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar { display: none; }
+  }
+
+  .ir-mobile-tab {
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 10px 14px;
+    color: rgba(255, 255, 255, 0.4);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color 0.15s, border-color 0.15s;
+    margin-bottom: -1px;
+
+    &:hover { color: rgba(255, 255, 255, 0.7); }
+
+    &.ir-mobile-tab--active {
+      color: #fff;
+      border-bottom-color: #fff;
+    }
   }
 }

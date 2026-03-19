@@ -16,11 +16,11 @@ const Login = () => {
   };
 
   if (loading) {
-    return <main>Loading........</main>;
+    return <div className="loading-screen">Loading........</div>;
   }
 
   return (
-    <main>
+    <div className="auth-main-page">
       <div className="form-container">
         <div className="logo-section">
           <img src="/logo.svg" alt="" />
@@ -60,7 +60,7 @@ const Login = () => {
           Don't have an account? <Link to={"/register"}>Register</Link>
         </p>
       </div>
-    </main>
+    </div>
   );
 };
 

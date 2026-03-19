@@ -46,7 +46,13 @@
 }
 
 // ── New Report Button ─────────────────────────────────────────────────
-.ir-reports-new-btn {
+.ir-reports-header__right{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+
+  .ir-reports-new-btn {
   background: #fff;
   color: #000;
   border: none;
@@ -68,6 +74,8 @@
     text-align: center;
   }
 }
+}
+
 
 // ── Grid ──────────────────────────────────────────────────────────────
 .ir-reports-grid {
