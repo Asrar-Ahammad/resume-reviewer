@@ -17,10 +17,31 @@ const Home = () => {
     const navigate = useNavigate()
 
     const handleGenerateReport = async () => {
+    try {
         const resumeFile = resumeInputRef.current.files[0]
+
+        if (!resumeFile) {
+            alert('Please upload a resume PDF')
+            return
+        }
+
+        if (!jobDescription.trim()) {
+            alert('Please enter a job description')
+            return
+        }
+
         const data = await generateReport({ jobDescription, selfDescription, resumeFile })
+
+        if (!data?._id) {
+            alert('Failed to generate report. Please try again.')
+            return
+        }
+
         navigate(`/interview/${data._id}`)
+    } catch (error) {
+        console.error('handleGenerateReport error:', error)
     }
+}
     if (loading) {
         return (
             <main className='loading-screen'><p>Loading...</p></main>

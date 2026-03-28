@@ -6,16 +6,25 @@ export const useAuth = () => {
   const { user, setUser, loading, setLoading } = context;
 
   const handleLogin = async ({ email, password }) => {
-    setLoading(true);
+    setLoading(true)
     try {
-      const data = await login({ email, password });
-      setUser(data.user);
+        const data = await login({ email, password })
+
+        if (!data || !data.user) {
+            console.log('Login failed — check credentials')
+            return
+        }
+
+        if (data.token) {
+            localStorage.setItem('token', data.token)
+        }
+        setUser(data.user)
     } catch (err) {
-      console.log(err);
+        console.log(err)
     } finally {
-      setLoading(false);
+        setLoading(false)
     }
-  };
+}
 
   const handleRegister = async ({ username, email, password }) => {
     setLoading(true);
@@ -43,16 +52,26 @@ export const useAuth = () => {
 
   useEffect(() => {
     const getAndSetUser = async () => {
-      try {
+    try {
+        const token = localStorage.getItem('token')
+        if (!token) {
+            setUser(null)
+            return
+        }
         const data = await getMe()
-        setUser(data.user)
-      } catch (err) {
+        if (data?.user) {
+            setUser(data.user)
+        } else {
+            localStorage.removeItem('token')
+            setUser(null)
+        }
+    } catch (err) {
         console.log(err)
-      } finally {
+        setUser(null)
+    } finally {
         setLoading(false)
-      }
-
     }
+}
 
     getAndSetUser()
   }, [])

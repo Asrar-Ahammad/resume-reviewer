@@ -1,37 +1,39 @@
 const jwt = require("jsonwebtoken");
 const tokenBlacklistModel = require("../models/blacklist.model");
 
+/**
+ * @name authUser
+ * @description Middleware to authenticate user via Bearer token in Authorization header
+ * @access Private
+ */
 async function authUser(req, res, next) {
-  const token = req.cookies.token;
+  const authHeader = req.headers.authorization
 
-  if (!token) {
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
     return res.status(401).json({
-      message: "token not provided",
+      message: "Token not provided",
     });
   }
 
-  const isTokenBlacklisted = await tokenBlacklistModel.findOne({
-    token,
-  });
+  const token = authHeader.split(' ')[1]
+
+  const isTokenBlacklisted = await tokenBlacklistModel.findOne({ token });
 
   if (isTokenBlacklisted) {
     return res.status(401).json({
-      message: "token is invalid",
+      message: "Token is invalid",
     });
   }
+
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
     req.user = decoded;
-
     next();
   } catch (err) {
     return res.status(401).json({
-      message: "invalid token",
+      message: "Invalid or expired token",
     });
   }
 }
 
-module.exports = {
-  authUser,
-};
+module.exports = { authUser };

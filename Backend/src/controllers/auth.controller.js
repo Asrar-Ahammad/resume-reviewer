@@ -5,10 +5,9 @@ const tokenBlacklistModel = require("../models/blacklist.model");
 
 /**
  * @name registerUserController
- * @description Register a new user, expecting name, email, and password in the request body.
+ * @description Register a new user, expecting username, email, and password in the request body.
  * @access Public
  */
-
 async function registerUserController(req, res) {
   const { username, email, password } = req.body;
 
@@ -25,11 +24,11 @@ async function registerUserController(req, res) {
   if (isUserAlreadyExist) {
     if (isUserAlreadyExist.username === username) {
       return res.status(400).json({
-        message: "Username already exist",
+        message: "Username already exists",
       });
     } else if (isUserAlreadyExist.email === email) {
       return res.status(400).json({
-        message: "Email already exist",
+        message: "Email already exists",
       });
     }
   }
@@ -45,18 +44,12 @@ async function registerUserController(req, res) {
   const token = jwt.sign(
     { id: user._id, username: user.username },
     process.env.JWT_SECRET,
-    { expiresIn: "1d" },
+    { expiresIn: "1d" }
   );
 
-  res.cookie('token', token, {
-    httpOnly: true,
-    secure: true,          // required for sameSite none
-    sameSite: 'none',      // allows cross-domain cookies
-    maxAge: 24 * 60 * 60 * 1000 // 1 day
-  })
-
-  res.status(201).json({
+  return res.status(201).json({
     message: "User registered successfully",
+    token,
     user: {
       id: user._id,
       username: user.username,
@@ -67,12 +60,17 @@ async function registerUserController(req, res) {
 
 /**
  * @name loginUserController
- * @description Login a new user, expecting email, and password in the request body.
+ * @description Login user, expecting email and password in the request body.
  * @access Public
  */
-
 async function loginUserController(req, res) {
   const { email, password } = req.body;
+
+  if (!email || !password) {
+    return res.status(400).json({
+      message: "Please provide email and password",
+    });
+  }
 
   const user = await userModel.findOne({ email });
 
@@ -91,23 +89,15 @@ async function loginUserController(req, res) {
   }
 
   const token = jwt.sign(
-    {
-      id: user._id,
-      username: user.username,
-    },
+    { id: user._id, username: user.username },
     process.env.JWT_SECRET,
-    { expiresIn: "1d" },
+    { expiresIn: "1d" }
   );
 
-  res.cookie('token', token, {
-    httpOnly: true,
-    secure: true,          // required for sameSite none
-    sameSite: 'none',      // allows cross-domain cookies
-    maxAge: 24 * 60 * 60 * 1000 // 1 day
-  })
 
-  res.status(200).json({
+  return res.status(200).json({
     message: "User logged in successfully",
+    token,
     user: {
       id: user._id,
       username: user.username,
@@ -118,32 +108,39 @@ async function loginUserController(req, res) {
 
 /**
  * @name logoutUserController
- * @description Logout user by blacklisting session token
- * @access Public
+ * @description Logout user by blacklisting the token from Authorization header
+ * @access Private
  */
-
 async function logoutUserController(req, res) {
-  const token = req.cookies.token;
+  const authHeader = req.headers.authorization
 
-  if (token) {
-    await tokenBlacklistModel.create({ token });
+  if (authHeader && authHeader.startsWith('Bearer ')) {
+    const token = authHeader.split(' ')[1]
+
+    await tokenBlacklistModel.create({ token })
   }
-  res.clearCookie("token");
-  res.status(200).json({
-    message: "user logged out successfully",
+
+  return res.status(200).json({
+    message: "User logged out successfully",
   });
 }
 
 /**
  * @name getMeController
- * @description Get current user details
- * @access Public
+ * @description Get current logged in user details
+ * @access Private
  */
-
 async function getMeController(req, res) {
   const user = await userModel.findById(req.user.id);
-  res.status(200).json({
-    message: "user details fetched successfully",
+
+  if (!user) {
+    return res.status(404).json({
+      message: "User not found",
+    });
+  }
+
+  return res.status(200).json({
+    message: "User details fetched successfully",
     user: {
       id: user._id,
       username: user.username,
