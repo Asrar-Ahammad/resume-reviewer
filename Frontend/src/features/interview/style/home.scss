@@ -62,9 +62,12 @@ main {
       .home-nav-right {
         button {
           padding: 8px 20px;
+          font-size: 0.76rem;
           font-weight: bold;
           border: none;
           cursor: pointer;
+          color: black;
+          background-color: white;
         }
 
       }
@@ -270,6 +273,8 @@ main {
       font-size: 11px;
       padding-inline: 0.9rem;
       padding-block: .4rem;
+      color:black;
+      background-color: white;
     }
   }
 }

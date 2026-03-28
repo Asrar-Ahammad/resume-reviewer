@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import '../style/interview.scss'
 import { useInterview } from '../hooks/useInterview'
 import { useNavigate, useParams } from 'react-router'
+import { ArrowLeftIcon } from '@phosphor-icons/react'
+
 
 // ── Helpers ────────────────────────────────────────────────────────────
 const getSeverityColor = (s) =>
@@ -169,7 +171,7 @@ const Interview = () => {
             className="ir-mobile-back-btn"
             onClick={() => navigate('/interview-reports')}
           >
-            ← Reports
+            <ArrowLeftIcon weight='bold' /> Report
           </button>
           <div className="ir-mobile-title-text">
             <span className="ir-sidebar-label">Applying For</span>
@@ -273,7 +275,7 @@ const Interview = () => {
           className="ir-view-reports-btn"
           onClick={() => navigate('/interview-reports')}
         >
-          ← View All Reports
+         <ArrowLeftIcon weight='bold' />  View All Reports
         </button>
 
         <div className="ir-sidebar-divider" />

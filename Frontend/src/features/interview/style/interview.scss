@@ -122,23 +122,28 @@ html, body {
 
 // ── View reports button ────────────────────────────────────────────────────────
 .ir-view-reports-btn {
-  background: none;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 5px;
+  background: white;
+  border: none;
   padding: 9px 14px;
-  color: rgba(255, 255, 255, 0.6);
+  color: black;
   font-family: 'Inter', sans-serif;
   font-size: 0.78rem;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
   text-align: left;
-  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  transition: all 0.15s, color 0.15s, border-color 0.15s;
   margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: .5rem;
 
   &:hover {
-    background: rgba(255, 255, 255, 0.05);
-    color: #fff;
-    border-color: rgba(255, 255, 255, 0.25);
+    background-color: #c9c9c9;
+  }
+
+  &:active{
+    scale: 0.95;
   }
 }
 
@@ -614,23 +619,24 @@ html, body {
   }
 
   .ir-mobile-back-btn {
-    background: none;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 5px;
+    background: white;
+    border: none;
     padding: 8px 12px;
-    color: rgba(255, 255, 255, 0.55);
+    color: black;
     font-family: 'Inter', sans-serif;
     font-size: 0.76rem;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
     white-space: nowrap;
     flex-shrink: 0;
     transition: background 0.15s, color 0.15s, border-color 0.15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
 
     &:hover {
-      background: rgba(255, 255, 255, 0.05);
-      color: #fff;
-      border-color: rgba(255, 255, 255, 0.25);
+      background-color: #c9c9c9;
     }
   }
 

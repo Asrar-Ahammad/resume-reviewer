@@ -142,9 +142,6 @@ const InterviewReports = () => {
                 {formatTime(report.createdAt)}
               </span>
             </div>
-
-            {/* Arrow */}
-            <div className="ir-reports-card__arrow">→</div>
           </div>
         ))}
 

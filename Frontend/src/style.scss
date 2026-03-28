@@ -14,3 +14,10 @@ body{
   background-color: black;
   font-family: "Inter", sans-serif;
 }
+
+button{
+  transition: all 0.3s ease-in-out;
+  &:active{
+    scale: 0.95;
+  }
+}
