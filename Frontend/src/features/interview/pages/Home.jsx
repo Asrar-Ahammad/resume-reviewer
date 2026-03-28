@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react'
 import '../style/home.scss'
+import '../style/home.css'
 import { SparkleIcon, UserIcon } from '@phosphor-icons/react'
 import { useInterview } from '../hooks/useInterview'
 import { useNavigate } from 'react-router'
@@ -44,7 +45,9 @@ const Home = () => {
 }
     if (loading) {
         return (
-            <main className='loading-screen'><p>Loading...</p></main>
+            <main className='loading-screen'>
+            <div className="loader"></div>
+            </main>
         )
     }
 

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { useAuth } from "../hooks/useAuth";
+import "../style.css"
 
 const Register = () => {
   const navigate = useNavigate();
@@ -15,6 +16,12 @@ const Register = () => {
     await handleRegister({username, email, password})
     navigate("/")
   };
+
+  if (loading) {
+    return <div className="loading-screen">
+      <div className="loader"></div>
+    </div>;
+  }
 
   return (
     <div className="auth-main-page">

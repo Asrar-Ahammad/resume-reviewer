@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../auth.form.scss";
+import "../style.css";
 import { Link, useNavigate } from "react-router";
 import { useAuth } from "../hooks/useAuth";
 
@@ -16,7 +17,9 @@ const Login = () => {
   };
 
   if (loading) {
-    return <div className="loading-screen">Loading........</div>;
+    return <div className="loading-screen">
+      <div className="loader"></div>
+    </div>;
   }
 
   return (
